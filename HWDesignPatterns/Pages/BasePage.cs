@@ -16,7 +16,7 @@ namespace HWDesignPatterns.Pages
         public BasePage(IWebDriver driver)
         {
             Driver = driver;
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
+            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
         }
 
         public IWebElement ScrollTo(IWebElement element)

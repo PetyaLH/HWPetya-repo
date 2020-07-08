@@ -1,8 +1,9 @@
 ﻿using HWDesignPatterns.Pages._3.NavigationsResizablePage;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
-
+using System.IO;
 
 namespace HWDesignPatterns.Tests.InteractionsTests
 {
@@ -65,6 +66,12 @@ namespace HWDesignPatterns.Tests.InteractionsTests
         [TearDown]
         public void TearDown()
         {
+            if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
+            {
+                ITakesScreenshot screenshotDriver = (ITakesScreenshot)Driver;
+                Screenshot screenshot = screenshotDriver.GetScreenshot();
+                screenshot.SaveAsFile($"{Directory.GetCurrentDirectory()}/{TestContext.CurrentContext.Test.Name}.png", ScreenshotImageFormat.Png);
+            }
             Driver.Quit();
         }
     }

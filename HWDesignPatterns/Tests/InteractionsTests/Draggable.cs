@@ -3,7 +3,7 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
-
+using System.IO;
 
 namespace HWDesignPatterns.Tests.InteractionsTests
 {
@@ -80,7 +80,7 @@ namespace HWDesignPatterns.Tests.InteractionsTests
         [Test]
         public void DragBox_AxisRestricted_LocationCheck()
         {
-            _draggablePage.WaitToLoad();
+            //_draggablePage.WaitToLoad();
             _draggablePage.GoToAxisRestrictedTab();//Clicks on the axisRestriction TAB
 
             double XBefore = _draggablePage.RestrictedX.Location.X;
@@ -105,12 +105,12 @@ namespace HWDesignPatterns.Tests.InteractionsTests
         [TearDown]
         public void TearDown()
         {
-            //if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
-            //{
-            //    ITakesScreenshot screenshotDriver = (ITakesScreenshot)Driver;
-            //    Screenshot screenshot = screenshotDriver.GetScreenshot();
-            //    screenshot.SaveAsFile("testscrshot.bmp", ScreenshotImageFormat.Bmp);
-            //}
+            if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
+            {
+                ITakesScreenshot screenshotDriver = (ITakesScreenshot)Driver;
+                Screenshot screenshot = screenshotDriver.GetScreenshot();
+                screenshot.SaveAsFile($"{Directory.GetCurrentDirectory()}/{TestContext.CurrentContext.Test.Name}.png", ScreenshotImageFormat.Png);
+            }
             //Driver.Quit();
         }
     }

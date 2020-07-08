@@ -8,10 +8,7 @@ namespace HWDesignPatterns.Pages._2.NavigationsDragabblePage
     {
         public DraggablePage(IWebDriver driver) : base(driver)
         {
-        }
-
-
-       
+        }            
 
         public void GoToAxisRestrictedTab()
         {
@@ -21,11 +18,5 @@ namespace HWDesignPatterns.Pages._2.NavigationsDragabblePage
         {
             ContainerTab.Click();
         }
-
-
-
-
-
-
     }
 }
